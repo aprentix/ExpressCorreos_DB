@@ -20,7 +20,7 @@ AND
 oficina.id_municipio IN (
 	SELECT id_municipio FROM municipio
     WHERE municipio.nombre = "Alcobendas"
-)
+);
 
 /*
 b. Obtener el nombre y apellidos del cartero que ha realizado el reparto del paquete 
@@ -44,6 +44,58 @@ e. Obtener el peso total de los paquetes y el nivel mayor de urgencia de las car
 que ha llevado los coches de la oficina “OF-MAD-O1” en los repartos que se les han asignado en los 
 últimos 7 días.
 */
+/*
+Obtener el peso total de los paquetes que ha llevado los coches de la oficina “OF-MAD-O1” 
+en los repartos que se les han asignado en los últimos 7 días.
+*/
+SELECT SUM(paquete.peso) AS peso_paquetes FROM reparto
+INNER JOIN paquete ON paquete.id_reparto = reparto.id_reparto
+INNER JOIN coche ON coche.matricula = reparto.matricula
+INNER JOIN oficina ON oficina.codigo = coche.codigo_oficina
+WHERE oficina.codigo = "1"
+AND reparto.fecha_creacion BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND DATE_SUB(CURDATE(), INTERVAL 8 DAY)
+
+/*
+Obtener el nivel mayor de urgencia de las cartas certificadas que ha llevado los coches de la oficina “OF-MAD-O1” 
+en los repartos que se les han asignado en los últimos 7 días.
+*/
+SELECT nivelMaximo()
+
+DELIMITER //
+CREATE FUNCTION nivelMaximo()
+RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN
+	DECLARE done INT DEFAULT FALSE;
+    DECLARE nivelActual VARCHAR(20);
+	DECLARE nivelMayor VARCHAR(20);
+    DECLARE cur1 CURSOR FOR (
+		SELECT cartacertificada.nivel_urgencia FROM reparto
+		INNER JOIN cartacertificada ON cartacertificada.id_reparto = reparto.id_reparto
+		INNER JOIN coche ON coche.matricula = reparto.matricula
+		INNER JOIN oficina ON oficina.codigo = coche.codigo_oficina
+		WHERE oficina.codigo = "1"
+		AND reparto.fecha_creacion BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND DATE_SUB(CURDATE(), INTERVAL 8 DAY)
+    );
+	SET n_segmentos_mejor_ruta = 0;
+		OPEN cur1;
+		read_loop: LOOP
+		FETCH cur1 INTO nivelActual;
+		IF nivelActual='ALTO' AND nivelMayor<>'ALTO' THEN
+			SET nivelMayor = nivelActual;
+		ELSEIF nivelActual='MEDIO' OR nivelMayor='BAJO' THEN 
+			SET nivelMayor = nivelActual;
+		ELSEIF nivelActual='BAJO' AND nivelMayor<>'ALTO' AND nivelMayor<>'MEDIO' 
+			SET nivelMayor = nivelActual;
+		END IF;
+		IF done THEN 
+			LEAVE read_loop;
+		END IF;
+		END LOOP;
+		CLOSE cur1;
+    RETURN (id_mejor_ruta);
+END %%
+DELIMITER ;
 
 /*
 f. Aumentar en un 10% la capacidad de los todos los coches que únicamente se hayan utilizado para 
@@ -51,8 +103,7 @@ realizar repartos de cartas.
 */
 
 /*
-g. Obtener los carteros que no hayan llevado a cabo recogidas de paquetes en la misma dirección 
-varias veces.
+g. Obtener los carteros que no hayan llevado a cabo recogidas de paquetes en la misma dirección varias veces.
 */
 SELECT DISTINCT nombre, apellido
 	FROM correosexpress.cartero INNER JOIN correosexpress.recogida
@@ -62,7 +113,7 @@ SELECT DISTINCT nombre, apellido
         	FROM correosexpress.recogida
         	GROUP by  id_direccion, dni_cartero
 		HAVING COUNT(*) > 1
-)
+);
 
 /*
 h. Obtener el código y la información del área de envío asociada a las oficinas en la que trabajan 
