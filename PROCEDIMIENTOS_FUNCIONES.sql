@@ -128,4 +128,6 @@ Vamos recorriendo las rutas con un cursor y calculamos el numero de segmentos qu
 visitaria dado el codigo del reparto
 */
 
+/*
 SELECT ruta_mejor(1) as mejorRuta;
+*/
