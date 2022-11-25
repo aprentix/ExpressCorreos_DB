@@ -7,7 +7,20 @@ a. Obtener las oficinas asociadas a areas  de envio que incluyan calles cuyo nom
 comience por “Paseo de”. 
 Además, sólo se deben obtener oficinas que estén dentro del municipio “Alcobendas”.
 */
-
+SELECT oficina.codigo FROM oficina
+INNER JOIN areaenvio ON areaenvio.id_oficina = oficina.codigo
+INNER JOIN area_envio_incluye_segmento_calle ON area_envio_incluye_segmento_calle.id_area_envio = areaenvio.id_area_envio
+INNER JOIN segmentocalle ON segmentocalle.n_Segmento = area_envio_incluye_segmento_calle.n_Segmento
+INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
+WHERE calle.id_calle IN (
+	SELECT id_calle FROM calle
+    WHERE nombre LIKE 'Paseo de %'
+)
+AND
+oficina.id_municipio IN (
+	SELECT id_municipio FROM municipio
+    WHERE municipio.nombre = "Alcobendas"
+)
 
 /*
 b. Obtener el nombre y apellidos del cartero que ha realizado el reparto del paquete 
