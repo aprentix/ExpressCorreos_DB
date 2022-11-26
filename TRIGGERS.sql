@@ -15,7 +15,7 @@ ID_paquete correcta
 */
 if char_length(NEW.id_paquete) > 12 
 OR char_length(NEW.id_paquete) < 12 
-or LEFT(NEW.id_paquete,2) != 'PQ' then
+or NEW.id_paquete not regexp 'PQ+[0-9]+$' then
 	signal sqlstate '02000'
 	SET message_text = 'ID incorrecto';
     
