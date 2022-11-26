@@ -164,7 +164,9 @@ insert into SegmentoCalle (n_Inicio, n_Final, id_calle) values
 
 
 insert into Trabaja (dniC, codOf, jornadaT, fechacomienzo) values
-    ('72983966K', 1, 'MAÑANA', '2020-01-04'),
+    ('72983966K', 1, 'TARDE', '2020-01-04'),
+	('72983966K', 1, 'MAÑANA', '2020-01-04'),
+	('72983966K', 1, 'NOCHE', '2020-01-04'),
     ('08628813H', 2, 'MAÑANA', '2009-12-07'),
     ('29293473Y', 3, 'MAÑANA', '2000-12-03'),
     ('66502430T', 4, 'MAÑANA', '2019-02-13'),

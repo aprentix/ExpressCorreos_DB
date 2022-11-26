@@ -119,6 +119,12 @@ SELECT DISTINCT nombre, apellido
 h. Obtener el código y la información del área de envío asociada a las oficinas en la que trabajan 
 carteros con todos los turnos existentes.
 */
+SELECT areaenvio.id_area_envio, areaenvio.nombre_area_envio ,areaenvio.id_oficina FROM areaenvio
+INNER JOIN oficina ON oficina.codigo = areaenvio.id_oficina
+INNER JOIN trabaja ON trabaja.codOf = oficina.codigo
+INNER JOIN turno ON turno.jornada = trabaja.jornadaT
+GROUP BY oficina.codigo 
+HAVING COUNT(distinct turno.jornada) = 3;
 
 /*
 i. Obtener las rutas que incluyen todos los segmentos de la calle “Avenida de América” de “Alcorcón” 
