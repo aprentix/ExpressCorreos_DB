@@ -36,7 +36,6 @@ insert into Municipio (nombre, nombre_provincia) values ('Gabri', 'Madrid');
 insert into Municipio (nombre, nombre_provincia) values ('Ria', 'Cataluña');
 insert into Municipio (nombre, nombre_provincia) values ('Alcobendas', 'Madrid');
 
-
 /*CALLE*/ 
 insert into Calle (nombre, id_municipio) values ('Daystar', 1);
 insert into Calle (nombre, id_municipio) values ('Pamela', 2);
@@ -44,9 +43,9 @@ insert into Calle (nombre, id_municipio) values ('Frivola', 3);
 insert into Calle (nombre, id_municipio) values ('Gayesta', 4);
 insert into Calle (nombre, id_municipio) values ('Finisterre', 5);
 insert into Calle (nombre, id_municipio) values ('Paseo de la Castellana', 1);
-insert into Calle (nombre, id_municipio) values ('Paseo de la Victoria', 2);
-insert into Calle (nombre, id_municipio) values ('Paseo de la Bonanza', 3);
-insert into Calle (nombre, id_municipio) values ('Paseo de la Mañana', 4);
+insert into Calle (nombre, id_municipio) values ('Paseo de la Victoria', 6);
+insert into Calle (nombre, id_municipio) values ('Paseo de la Bonanza', 7);
+insert into Calle (nombre, id_municipio) values ('Paseo de la Mañana', 7);
 
 /*CENTRO CLASIFICACION*/
 insert into CentroClasificacion (nombre_centro, capacidadProcesamientoPaquetes, capacidadProcesamientoCartas, id_municipio) values 
@@ -61,15 +60,15 @@ insert into CentroClasificacion (nombre_centro, capacidadProcesamientoPaquetes, 
 /*OFICINA*/
 insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (1, 2, 1);
 insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (2, 3, 2);
-insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (3, 1, 3);
-insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (4, 4, 4);
+insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (3, 1, 7);
+insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (4, 4, 7);
 insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (5, 1, 5);
 insert into Oficina (codigo, codigo_centro_clasificacion, id_municipio) values (6, 3, 1);
 
 
 /*AREA ENVIO*/
 insert into AreaEnvio (id_area_envio, nombre_area_envio, id_oficina) values 
-(1, "AR-MAD-O3", 1), (2,"AR-MAD-O2", 2), (3,"AR-MAD-O1", 3), (4,"AR-MAD-O4", 4), (5,"AR-MAD-50", 5), (6, "AR-MAD-O3-20", 5);
+(1, "AR-MAD-O3", 1), (2,"AR-MAD-O2", 2), (3,"AR-MAD-O1", 3), (4,"AR-MAD-O4", 4), (5,"AR-MAD-50", 5), (8, "AR-MAD-O3-20", 5);
 
 /*COCHE*/
 insert into Coche (matricula, capacidad, codigo_oficina) values ('5365 HER', 273.96, 1);
@@ -85,7 +84,7 @@ insert into Turno (horario, jornada) values ('9:30-12:30', 'NOCHE');
 
 /*DIRECCION*/
 insert into Direccion (id_direccion, numero, letra, portal, id_calle) values
-    (1, 21, 'A', 32, 2),
+    (1, 5, 'A', 5, 2),
     (2, 45, 'A', 23, 1),
     (3, 32, 'C', 2, 3),
     (4, 45, 'B', 32, 1),
@@ -109,33 +108,42 @@ insert into Reparto (fecha_creacion, dni_cartero, matricula, id_ruta) values
     ('2020-05-21', '08628813H', '5365 HER', 2),
     ('2021-12-21', '08628813H', '5365 HER', 3),
     ('2021-08-23', '08628813H', '5365 HER', 4),
-    ('2021-05-26', '08628813H', '5365 HER', 5);
+    ('2022-11-25', '08628813H', '5365 HER', 5),
+	('2022-11-24', '08628813H', '5365 HER', 4),
+    ('2022-11-23', '08628813H', '5365 HER', 4),
+    ('2022-11-22', '08628813H', '5365 HER', 4),
+    ('2022-11-13', '08628813H', '5365 HER', 4);
 
 
 /*CARTA*/
 insert into Carta (id_carta, formato, id_UGenerico_envia, id_UGenerico_recibe, id_Reparto) values
-	(1, 'A4', 3, 1, 2),
-    (2, 'A2', 1, 2, 4),
-    (3, 'A3', 2, 3, 2),
+	(1, 'A4', 3, 1, 1),
+    (2, 'A2', 1, 2, 1),
+    (3, 'A3', 2, 3, 1),
 	(4, 'A3', 4, 5, 1),
 	(5, 'A4', 1, 3, 3);
 
 /*PAQUETE*/
 insert into Paquete (dimension, peso, id_ug_envia, id_ug_recibe, dni_cartero, id_reparto) values 
 	(1.5, 0.5, 1, 2, '08628813H', 1), 
+    (1.5, 0.5, 1, 3, '08628813H', 1), 
+    (1.5, 0.5, 2, 4, '08628813H', 1), 
+    (1.5, 0.5, 1, 2, '08628813H', 1), 
     (3.5, 0.5, 2, 3, '08628813H', 2),
-    (2.5, 0.5, 3, 4, '08628813H', 3),
-    (4.5, 3.5, 5, 4, '08628813H', 4),
-    (6.5, 7.5, 5, 2, '08628813H', 1),
-    (8.5, 0.5, 3, 2, '08628813H', 2);
+    (2.5, 0.5, 3, 4, '08628813H', 6),
+    (4.5, 3.5, 5, 4, '08628813H', 7),
+    (6.5, 7.5, 5, 2, '08628813H', 8),
+    (8.5, 0.5, 3, 2, '08628813H', 9);
 
 /*CARTA CERTIFICADA*/
 insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (1, 'BAJO', '06456679G', '98493233B', 1);
-insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (2, 'ALTO', '06456679G', '98493233B', 2);
-insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (3, 'MEDIO', '06456679G', '69895509G', 3);
-insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (4, 'BAJO', '69895509G', '69895509G', 4);
-insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (5, 'MEDIO', '69895509G', '69895509G', 5);
-insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (6, 'BAJO', '76784988V', '91195150N', 1);
+insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (2, 'ALTO', '06456679G', '98493233B', 7);
+insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (3, 'ALTO', '06456679G', '98493233B', 6);
+insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (4, 'ALTO', '06456679G', '98493233B', 8);
+insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (5, 'MEDIO', '06456679G', '69895509G', 8);
+insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (6, 'BAJO', '69895509G', '69895509G', 6);
+insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (7, 'MEDIO', '69895509G', '69895509G', 7);
+insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values (8, 'BAJO', '76784988V', '91195150N', 8);
 
 /*RECOGIDA*/
 insert into Recogida (fecha_solicitud_recogida, id_direccion, dni_uidentificado, dni_cartero) values
@@ -159,8 +167,8 @@ insert into SegmentoCalle (n_Inicio, n_Final, id_calle) values
     (1, 13, 1),
     (2, 15, 2),
     (45, 76, 3),
-    (23, 67, 4),
-    (23, 56 ,5);
+    (23, 67, 8),
+    (23, 56 ,9);
 
 
 insert into Trabaja (dniC, codOf, jornadaT, fechacomienzo) values
@@ -184,12 +192,12 @@ insert into UIdentificado_vive_en_direccion (id_direccion, dni_uidentificado) va
 
 /*area_envio_incluye_segmento_calle*/
 insert into area_envio_incluye_segmento_calle (id_area_envio, n_Segmento) values
-    (1,2),(4,3),(2,3),(4,2),(2,1);
+    (1,2),(4,3),(2,4),(4,5),(2,1);
 
 
 /*ruta_incluye_segmento*/
 insert into ruta_incluye_segmento (id_ruta, n_segmento) values
-    (1,2),(1,3),(2,5),(3,2),(1,4);
+    (1,2),(1,3),(2,5),(3,2),(1,4),(4,2),(4,1);
 
 
 /*cartero_reparte_en_area_envio*/

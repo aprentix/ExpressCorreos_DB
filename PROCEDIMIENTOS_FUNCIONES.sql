@@ -52,13 +52,14 @@ RETURNS INT
 DETERMINISTIC
 BEGIN
 	DECLARE done INT DEFAULT FALSE;
-    DECLARE id_mejor_ruta INT;
+    DECLARE id_mejor_ruta INT default -1;
 	DECLARE n_segmentos_mejor_ruta INT;
     DECLARE ruta_id, n_segmentos INT;
     DECLARE cur1 CURSOR FOR (
 		/*RUTA Y TOTAL DE SEGMENTOS QUE ESTAN EN LA RUTA Y EN LA DIRECCION DE REPARTO*/
 		SELECT Ruta.id, calculaSegmentos(Ruta.id, reparto) as segmentosRutaReparto FROM Ruta
     );
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 	SET n_segmentos_mejor_ruta = 0;
 		OPEN cur1;
 		read_loop: LOOP
@@ -75,7 +76,6 @@ BEGIN
     RETURN (id_mejor_ruta);
 END %%
 DELIMITER ;
-
 
 DELIMITER //
 CREATE FUNCTION calculaSegmentos(RUTA_ID INT, REPARTO_ID INT)
@@ -130,4 +130,7 @@ visitaria dado el codigo del reparto
 
 /*
 SELECT ruta_mejor(1) as mejorRuta;
+*/
+/*
+1
 */
