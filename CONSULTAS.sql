@@ -170,3 +170,20 @@ HAVING COUNT(distinct turno.jornada) = 3;
 i. Obtener las rutas que incluyen todos los segmentos de la calle “Avenida de América” de “Alcorcón” 
 y que se hayan realizado más de 3 repartos en ella.
 */
+SELECT * FROM ruta
+INNER JOIN ruta_incluye_segmento ON ruta.id = ruta_incluye_segmento.id_ruta
+INNER JOIN segmentocalle ON segmentocalle.n_Segmento = ruta_incluye_segmento.n_segmento
+INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
+INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
+INNER JOIN reparto ON reparto.id_ruta = ruta.id
+WHERE calle.nombre = 'Avenida de América' 
+AND municipio.nombre = 'Alcorcón'
+GROUP BY segmentocalle.n_Segmento
+HAVING COUNT(*) = (
+		SELECT COUNT(*) FROM segmentocalle 
+		INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
+		INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
+		WHERE calle.nombre = 'Avenida de América' 
+		AND municipio.nombre = 'Alcorcón'
+)
+AND COUNT(distinct reparto.id_reparto) > 3
