@@ -72,7 +72,7 @@ FROM reparto
 INNER JOIN coche ON reparto.matricula = coche.matricula
 WHERE codigo_oficina IN(SELECT DISTINCT coche.codigo_oficina
 				FROM coche)
-GROUP BY dni_cartero
+GROUP BY dni_cartero, coche.codigo_oficina
 ORDER BY COUNT(*) DESC
 
 /*Posible solución, la de arriba solo cuenta los pedidos, desconozco si la de abajo es 100% solución pero parece funcionar
