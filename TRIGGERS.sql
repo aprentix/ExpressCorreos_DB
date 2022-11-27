@@ -26,13 +26,13 @@ elseif NEW.dimension not regexp '[0-9]+$+x+[0-9]+$'
 /*
 Primera dimension
 */
-or values(NEW.dimension regexp '[0-9]+$') < 5
-or values(NEW.dimension regexp '[0-9]+$') > 25
+or NEW.dimension regexp '[0-9]+$' + 0 < 5
+or NEW.dimension regexp '[0-9]+$' + 0 > 25
 /*
 Segunda dimension
 */
-or values(NEW.dimension regexp 'x+[0-9]+$') < 5
-or values(NEW.dimension regexp 'x+[0-9]+$') > 25 then
+or substr(NEW.dimension, locate('x',NEW.dimension)+1, 3) + 0 < 5
+or substr(NEW.dimension, locate('x',NEW.dimension)+1, 3) + 0 > 25 then
 	signal sqlstate '02000'
 	SET message_text = 'Dimensiones del paquete incorrecta';
    
