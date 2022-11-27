@@ -30,7 +30,11 @@ b. Obtener el nombre y apellidos del cartero que ha realizado el reparto del paq
 con menor peso, así como la matricula del coche con el que hizo dicho reparto, y el peso 
 de dicho paquete.
 */
-
+SELECT DISTINCT cartero.nombre, cartero.apellido, reparto.matricula, paquete.peso FROM cartero
+INNER JOIN reparto ON cartero.dni = reparto.dni_cartero
+INNER JOIN paquete ON reparto.id_reparto = paquete.id_reparto
+WHERE paquete.peso <= ALL ( SELECT paquete.peso FROM paquete)
+;
 /*
 c. Obtener el nombre, apellidos y dirección completa de los usuarios que han enviado 
 cartas normales y certificadas (devolver el tipo de carta también) dentro del área de envío 
@@ -63,6 +67,19 @@ FROM uidentificado
 d. Obtener el numero total de repartos realizados por cada cartero en las diferentes 
 oficinas ordenado de mayor a menor.
 */
+SELECT dni_cartero, coche.codigo_oficina, COUNT(*)
+FROM reparto
+INNER JOIN coche ON reparto.matricula = coche.matricula
+WHERE codigo_oficina IN(SELECT DISTINCT coche.codigo_oficina
+				FROM coche)
+GROUP BY dni_cartero, coche.codigo_oficina
+ORDER BY dni_cartero,COUNT(*) DESC
+
+/*Posible solución, la de arriba solo cuenta los pedidos, desconozco si la de abajo es 100% solución pero parece funcionar
+SELECT dni_cartero, count(*)
+FROM reparto
+group by dni_cartero
+order by count(*) DESC*/
 
 /*
 e. Obtener el peso total de los paquetes y el nivel mayor de urgencia de las cartas certificadas 
@@ -145,7 +162,7 @@ g. Obtener los carteros que no hayan llevado a cabo recogidas de paquetes en la 
 SELECT DISTINCT nombre, apellido
 	FROM correosexpress.cartero INNER JOIN correosexpress.recogida
 		ON cartero.dni = recogida.dni_cartero
-	Where dni_cartero NOT IN (
+	WHERE dni_cartero NOT IN (
 		SELECT dni_cartero
         	FROM correosexpress.recogida
         	GROUP by  id_direccion, dni_cartero
@@ -178,12 +195,21 @@ INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
 INNER JOIN reparto ON reparto.id_ruta = ruta.id
 WHERE calle.nombre = 'Avenida de América' 
 AND municipio.nombre = 'Alcorcón'
+<<<<<<< HEAD
 GROUP BY segmentocalle.n_Segmento
 HAVING COUNT(*) = (
+=======
+GROUP BY ruta.id
+HAVING COUNT(distinct segmentocalle.n_Segmento) = (
+>>>>>>> 5037223447bf463628b6c69453849a5953fb4018
 		SELECT COUNT(*) FROM segmentocalle 
 		INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
 		INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
 		WHERE calle.nombre = 'Avenida de América' 
 		AND municipio.nombre = 'Alcorcón'
 )
+<<<<<<< HEAD
 AND COUNT(distinct reparto.id_reparto) > 3
+=======
+AND COUNT(distinct reparto.id_reparto) > 3
+>>>>>>> 5037223447bf463628b6c69453849a5953fb4018
