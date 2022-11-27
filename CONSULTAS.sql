@@ -30,7 +30,7 @@ b. Obtener el nombre y apellidos del cartero que ha realizado el reparto del paq
 con menor peso, así como la matricula del coche con el que hizo dicho reparto, y el peso 
 de dicho paquete.
 */
-SELECT cartero.nombre, cartero.apellido, reparto.matricula FROM cartero
+SELECT DISTINCT cartero.nombre, cartero.apellido, reparto.matricula, paquete.peso FROM cartero
 INNER JOIN reparto ON cartero.dni = reparto.dni_cartero
 INNER JOIN paquete ON reparto.id_reparto = paquete.id_reparto
 WHERE paquete.peso <= ALL ( SELECT paquete.peso FROM paquete)
