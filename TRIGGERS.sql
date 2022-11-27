@@ -26,8 +26,9 @@ elseif NEW.dimension not regexp '[0-9]+$+x+[0-9]+$'
 /*
 Primera dimension
 */
-or NEW.dimension regexp '[0-9]+$' + 0 < 5
-or NEW.dimension regexp '[0-9]+$' + 0 > 25
+
+or substr(NEW.dimension, 1,locate('x', NEW.dimension)-1) + 0 < 5
+or substr(NEW.dimension, 1,locate('x', NEW.dimension)-1) + 0 > 25
 /*
 Segunda dimension
 */
