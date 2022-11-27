@@ -22,13 +22,12 @@ or NEW.id_paquete not regexp 'PQ+[0-9]+$' then
 /*
 dimension del paquete correcta
 */
-elseif NEW.dimension < 25 then
+elseif NEW.dimension not regexp '[0-9]+$+x+[0-9]+$' 
+or values(NEW.dimension regexp '[0-9]+$') < 5
+or values(NEW.dimension regexp '[0-9]+$') > 25 then
 	signal sqlstate '02000'
-	SET message_text = 'Paquete demasiado pequeño';
-elseif NEW.dimension > 625 then
-	signal sqlstate '02000'
-	SET message_text = 'Paquete demasiado pequeño';
-    
+	SET message_text = 'Dimensiones del paquete incorrecta';
+   
 /*
 peso del paquete correcto
 */
