@@ -70,6 +70,13 @@ oficinas ordenado de mayor a menor.
 SELECT DISTINCT COUNT(*)
 FROM reparto
 ORDERED BY DESC
+
+/*Posible solución, la de arriba solo cuenta los pedidos, desconozco si la de abajo es 100% solución pero parece funcionar
+SELECT dni_cartero, count(*)
+FROM reparto
+group by dni_cartero
+order by count(*) DESC*/
+
 /*
 e. Obtener el peso total de los paquetes y el nivel mayor de urgencia de las cartas certificadas 
 que ha llevado los coches de la oficina “OF-MAD-O1” en los repartos que se les han asignado en los 
