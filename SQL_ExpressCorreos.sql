@@ -12,8 +12,8 @@ CREATE TABLE CartaCertificada(
 );
 
 CREATE TABLE Paquete(
-	id_paquete INT NOT NULL AUTO_INCREMENT UNIQUE,
-    dimension FLOAT NOT NULL,
+	id_paquete VARCHAR(20) NOT NULL AUTO_INCREMENT UNIQUE,
+    dimension VARCHAR(5) NOT NULL,
     peso FLOAT NOT NULL,
     id_ug_envia INT NOT NULL,
     id_ug_recibe INT DEFAULT NULL,
