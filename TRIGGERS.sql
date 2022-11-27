@@ -23,8 +23,16 @@ or NEW.id_paquete not regexp 'PQ+[0-9]+$' then
 dimension del paquete correcta
 */
 elseif NEW.dimension not regexp '[0-9]+$+x+[0-9]+$' 
+/*
+Primera dimension
+*/
 or values(NEW.dimension regexp '[0-9]+$') < 5
-or values(NEW.dimension regexp '[0-9]+$') > 25 then
+or values(NEW.dimension regexp '[0-9]+$') > 25
+/*
+Segunda dimension
+*/
+or values(NEW.dimension regexp 'x+[0-9]+$') < 5
+or values(NEW.dimension regexp 'x+[0-9]+$') > 25 then
 	signal sqlstate '02000'
 	SET message_text = 'Dimensiones del paquete incorrecta';
    
