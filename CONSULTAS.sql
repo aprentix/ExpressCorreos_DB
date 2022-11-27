@@ -178,8 +178,8 @@ INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
 INNER JOIN reparto ON reparto.id_ruta = ruta.id
 WHERE calle.nombre = 'Avenida de América' 
 AND municipio.nombre = 'Alcorcón'
-GROUP BY segmentocalle.n_Segmento
-HAVING COUNT(*) = (
+GROUP BY ruta.id
+HAVING COUNT(distinct segmentocalle.n_Segmento) = (
 		SELECT COUNT(*) FROM segmentocalle 
 		INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
 		INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
