@@ -67,9 +67,13 @@ FROM uidentificado
 d. Obtener el numero total de repartos realizados por cada cartero en las diferentes 
 oficinas ordenado de mayor a menor.
 */
-SELECT DISTINCT COUNT(*)
+SELECT dni_cartero, coche.codigo_oficina, COUNT(*)
 FROM reparto
-ORDERED BY DESC
+INNER JOIN coche ON reparto.matricula = coche.matricula
+WHERE codigo_oficina IN(SELECT DISTINCT coche.codigo_oficina
+				FROM coche)
+GROUP BY dni_cartero
+ORDER BY COUNT(*) DESC
 
 /*Posible solución, la de arriba solo cuenta los pedidos, desconozco si la de abajo es 100% solución pero parece funcionar
 SELECT dni_cartero, count(*)
@@ -158,7 +162,7 @@ g. Obtener los carteros que no hayan llevado a cabo recogidas de paquetes en la 
 SELECT DISTINCT nombre, apellido
 	FROM correosexpress.cartero INNER JOIN correosexpress.recogida
 		ON cartero.dni = recogida.dni_cartero
-	Where dni_cartero NOT IN (
+	WHERE dni_cartero NOT IN (
 		SELECT dni_cartero
         	FROM correosexpress.recogida
         	GROUP by  id_direccion, dni_cartero
