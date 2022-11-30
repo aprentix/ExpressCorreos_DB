@@ -7,7 +7,7 @@ a. Obtener las oficinas asociadas a areas  de envio que incluyan calles cuyo nom
 comience por “Paseo de”. 
 Además, sólo se deben obtener oficinas que estén dentro del municipio “Alcobendas”.
 */
-SELECT oficina.codigo, oficina.codigo_centro_clasificacion, oficina.id_municipio FROM oficina
+SELECT DISTINCT oficina.codigo, oficina.codigo_centro_clasificacion, oficina.id_municipio FROM oficina
 INNER JOIN areaenvio ON areaenvio.id_oficina = oficina.codigo
 INNER JOIN area_envio_incluye_segmento_calle ON area_envio_incluye_segmento_calle.id_area_envio = areaenvio.id_area_envio
 INNER JOIN segmentocalle ON segmentocalle.n_Segmento = area_envio_incluye_segmento_calle.n_Segmento
@@ -193,7 +193,7 @@ HAVING COUNT(distinct turno.jornada) = 3;
 i. Obtener las rutas que incluyen todos los segmentos de la calle “Avenida de América” de “Alcorcón” 
 y que se hayan realizado más de 3 repartos en ella.
 */
-SELECT * FROM ruta
+SELECT ruta.id FROM ruta
 INNER JOIN ruta_incluye_segmento ON ruta.id = ruta_incluye_segmento.id_ruta
 INNER JOIN segmentocalle ON segmentocalle.n_Segmento = ruta_incluye_segmento.n_segmento
 INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
