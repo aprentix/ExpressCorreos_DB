@@ -33,8 +33,7 @@ de dicho paquete.
 SELECT DISTINCT cartero.nombre, cartero.apellido, reparto.matricula, paquete.peso FROM cartero
 INNER JOIN reparto ON cartero.dni = reparto.dni_cartero
 INNER JOIN paquete ON reparto.id_reparto = paquete.id_reparto
-WHERE paquete.peso <= ALL ( SELECT paquete.peso FROM paquete)
-;
+WHERE paquete.peso <= ALL ( SELECT paquete.peso FROM paquete);
 /*
 c. Obtener el nombre, apellidos y dirección completa de los usuarios que han enviado 
 cartas normales y certificadas (devolver el tipo de carta también) dentro del área de envío 
@@ -77,7 +76,7 @@ INNER JOIN coche ON reparto.matricula = coche.matricula
 WHERE codigo_oficina IN(SELECT DISTINCT coche.codigo_oficina
 				FROM coche)
 GROUP BY dni_cartero, coche.codigo_oficina
-ORDER BY dni_cartero,COUNT(*) DESC
+ORDER BY dni_cartero,COUNT(*) DESC;
 
 /*Posible solución, la de arriba solo cuenta los pedidos, desconozco si la de abajo es 100% solución pero parece funcionar
 SELECT dni_cartero, count(*)
@@ -152,7 +151,7 @@ ALTO
 /*
 f. Aumentar en un 10% la capacidad de los todos los coches que únicamente se hayan utilizado para 
 realizar repartos de cartas.
-/*CONSIDERANDO CARTAS CERTIFICADAS COMO CARTAS*/
+CONSIDERANDO CARTAS CERTIFICADAS COMO CARTAS
 */
 UPDATE coche
 INNER JOIN reparto ON coche.matricula=reparto.matricula
@@ -201,21 +200,12 @@ INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
 INNER JOIN reparto ON reparto.id_ruta = ruta.id
 WHERE calle.nombre = 'Avenida de América' 
 AND municipio.nombre = 'Alcorcón'
-<<<<<<< HEAD
-GROUP BY segmentocalle.n_Segmento
-HAVING COUNT(*) = (
-=======
 GROUP BY ruta.id
 HAVING COUNT(distinct segmentocalle.n_Segmento) = (
->>>>>>> 5037223447bf463628b6c69453849a5953fb4018
 		SELECT COUNT(*) FROM segmentocalle 
 		INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
 		INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
 		WHERE calle.nombre = 'Avenida de América' 
 		AND municipio.nombre = 'Alcorcón'
 )
-<<<<<<< HEAD
 AND COUNT(distinct reparto.id_reparto) > 3
-=======
-AND COUNT(distinct reparto.id_reparto) > 3
->>>>>>> 5037223447bf463628b6c69453849a5953fb4018
