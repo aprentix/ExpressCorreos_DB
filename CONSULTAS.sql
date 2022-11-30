@@ -42,26 +42,30 @@ cartas normales y certificadas (devolver el tipo de carta tambi√©n) dentro del √
 */
 SELECT ugenerico.nombre, ugenerico.apellidos, direccion.portal, direccion.numero, direccion.piso, direccion.letra, calle.nombre,municipio.nombre,provincia.nombre
 FROM ugenerico
-	INNER JOIN direccion ON ugenerico.id_direccion = direccion.id_direccion
-    INNER JOIN calle ON direccion.id_calle = calle.id_calle
-    INNER JOIN municipio ON calle.id_municipio = municipio.id_municipio
+	INNER JOIN direccion ON direccion.id_direccion = ugenerico.id_direccion
+	INNER JOIN calle ON calle.id_calle = direccion.id_calle
+    INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
     INNER JOIN provincia ON municipio.nombre_provincia = provincia.nombre
-    INNER JOIN oficina ON municipio.id_municipio = oficina.id_municipio
+    INNER JOIN oficina ON oficina.id_municipio = municipio.id_municipio
     INNER JOIN areaenvio ON oficina.codigo = areaenvio.id_oficina
     WHERE areaenvio.nombre_area_envio = 'AR-MAD-03'
-    
-    UNION 
-    
-    SELECT uidentificado.nombre, uidentificado.apellidos, direccion.portal, direccion.numero, direccion.piso, direccion.letra, calle.nombre,municipio.nombre,provincia.nombre
+    AND ugenerico.id_ugenerico IN (
+		SELECT carta.id_UGenerico_envia FROM carta
+	)
+UNION
+SELECT uidentificado.nombre, uidentificado.apellidos, direccion.portal, direccion.numero, direccion.piso, direccion.letra, calle.nombre,municipio.nombre,provincia.nombre
 FROM uidentificado
-	INNER JOIN uidentificado_vive_en_direccion ON uidentificado.dni_uidentificado = uidentificado_vive_en_direccion.dni_uidentificado
-	INNER JOIN direccion ON uidentificado_vive_en_direccion.id_direccion = direccion.id_direccion
-    INNER JOIN calle ON direccion.id_calle = calle.id_calle
-    INNER JOIN municipio ON calle.id_municipio = municipio.id_municipio
+	INNER JOIN uidentificado_vive_en_direccion ON uidentificado_vive_en_direccion.dni_uidentificado=uidentificado.dni_uidentificado
+	INNER JOIN direccion ON direccion.id_direccion = uidentificado_vive_en_direccion.id_direccion
+	INNER JOIN calle ON calle.id_calle = direccion.id_calle
+    INNER JOIN municipio ON municipio.id_municipio = calle.id_municipio
     INNER JOIN provincia ON municipio.nombre_provincia = provincia.nombre
-    INNER JOIN oficina ON municipio.id_municipio = oficina.id_municipio
+    INNER JOIN oficina ON oficina.id_municipio = municipio.id_municipio
     INNER JOIN areaenvio ON oficina.codigo = areaenvio.id_oficina
-    WHERE areaenvio.nombre_area_envio = 'AR-MAD-03';
+    WHERE areaenvio.nombre_area_envio = 'AR-MAD-03'
+    AND uidentificado.dni_uidentificado IN (
+		SELECT cartacertificada.dni_ui_envia FROM cartacertificada
+);
 
 /*
 d. Obtener el numero total de repartos realizados por cada cartero en las diferentes 
