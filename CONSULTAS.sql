@@ -98,7 +98,7 @@ SELECT SUM(paquete.peso) FROM reparto
 INNER JOIN paquete ON paquete.id_reparto = reparto.id_reparto
 INNER JOIN coche ON coche.matricula = reparto.matricula
 INNER JOIN oficina ON oficina.codigo = coche.codigo_oficina
-WHERE oficina.codigo = "1"
+WHERE oficina.codigo = "3"
 AND fecha_creacion < CURDATE() AND fecha_creacion >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);
 /*
 11.5
@@ -120,7 +120,7 @@ BEGIN
 		INNER JOIN cartacertificada ON cartacertificada.id_reparto = reparto.id_reparto
 		INNER JOIN coche ON coche.matricula = reparto.matricula
 		INNER JOIN oficina ON oficina.codigo = coche.codigo_oficina
-		WHERE oficina.codigo = "1"
+		WHERE oficina.codigo = "3"
 		AND fecha_creacion < CURDATE() AND fecha_creacion >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
     );
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
