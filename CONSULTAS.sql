@@ -7,7 +7,7 @@ a. Obtener las oficinas asociadas a areas  de envio que incluyan calles cuyo nom
 comience por “Paseo de”. 
 Además, sólo se deben obtener oficinas que estén dentro del municipio “Alcobendas”.
 */
-SELECT oficina.codigo, oficina.codigo_centro_clasificacion, oficina.id_municipio FROM oficina
+SELECT DISTINCT oficina.codigo, oficina.codigo_centro_clasificacion, oficina.id_municipio FROM oficina
 INNER JOIN areaenvio ON areaenvio.id_oficina = oficina.codigo
 INNER JOIN area_envio_incluye_segmento_calle ON area_envio_incluye_segmento_calle.id_area_envio = areaenvio.id_area_envio
 INNER JOIN segmentocalle ON segmentocalle.n_Segmento = area_envio_incluye_segmento_calle.n_Segmento
@@ -98,7 +98,7 @@ SELECT SUM(paquete.peso) FROM reparto
 INNER JOIN paquete ON paquete.id_reparto = reparto.id_reparto
 INNER JOIN coche ON coche.matricula = reparto.matricula
 INNER JOIN oficina ON oficina.codigo = coche.codigo_oficina
-WHERE oficina.codigo = "1"
+WHERE oficina.codigo = "3"
 AND fecha_creacion < CURDATE() AND fecha_creacion >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);
 /*
 11.5
@@ -120,7 +120,7 @@ BEGIN
 		INNER JOIN cartacertificada ON cartacertificada.id_reparto = reparto.id_reparto
 		INNER JOIN coche ON coche.matricula = reparto.matricula
 		INNER JOIN oficina ON oficina.codigo = coche.codigo_oficina
-		WHERE oficina.codigo = "1"
+		WHERE oficina.codigo = "3"
 		AND fecha_creacion < CURDATE() AND fecha_creacion >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
     );
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
@@ -152,14 +152,16 @@ ALTO
 /*
 f. Aumentar en un 10% la capacidad de los todos los coches que únicamente se hayan utilizado para 
 realizar repartos de cartas.
+/*CONSIDERANDO CARTAS CERTIFICADAS COMO CARTAS*/
 */
 UPDATE coche
 INNER JOIN reparto ON coche.matricula=reparto.matricula
-INNER JOIN carta ON reparto.id_reparto=carta.id_Reparto
 SET capacidad = capacidad * 1.10
-WHERE EXISTS(SELECT id_Reparto 
-				FROM carta	 
-					WHERE carta.id_Reparto= reparto.id_reparto);
+WHERE reparto.matricula NOT IN(
+		SELECT reparto.matricula
+		FROM reparto 
+		INNER JOIN paquete ON paquete.id_reparto = reparto.id_reparto
+);
 /*
 g. Obtener los carteros que no hayan llevado a cabo recogidas de paquetes en la misma dirección varias veces.
 */
@@ -191,7 +193,7 @@ HAVING COUNT(distinct turno.jornada) = 3;
 i. Obtener las rutas que incluyen todos los segmentos de la calle “Avenida de América” de “Alcorcón” 
 y que se hayan realizado más de 3 repartos en ella.
 */
-SELECT * FROM ruta
+SELECT ruta.id FROM ruta
 INNER JOIN ruta_incluye_segmento ON ruta.id = ruta_incluye_segmento.id_ruta
 INNER JOIN segmentocalle ON segmentocalle.n_Segmento = ruta_incluye_segmento.n_segmento
 INNER JOIN calle ON calle.id_calle = segmentocalle.id_calle
