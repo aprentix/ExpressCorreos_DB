@@ -157,10 +157,10 @@ realizar repartos de cartas.
 UPDATE coche
 INNER JOIN reparto ON coche.matricula=reparto.matricula
 SET capacidad = capacidad * 1.10
-WHERE NOT EXISTS(	
-		SELECT id_reparto 
-		FROM paquete	 
-		WHERE paquete.id_reparto = reparto.id_reparto
+WHERE reparto.matricula NOT IN(
+		SELECT reparto.matricula
+		FROM reparto 
+		INNER JOIN paquete ON paquete.id_reparto = reparto.id_reparto
 );
 /*
 g. Obtener los carteros que no hayan llevado a cabo recogidas de paquetes en la misma dirección varias veces.
