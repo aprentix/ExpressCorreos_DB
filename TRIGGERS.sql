@@ -13,9 +13,9 @@ BEGIN
 /*
 ID_paquete correcta
 */
-if char_length(NEW.id_paquete) > 12 
-OR char_length(NEW.id_paquete) < 12 
-or NEW.id_paquete not regexp 'PQ+[0-9]+$' then
+if char_length(NEW.nombre_paquete) > 12 
+OR char_length(NEW.nombre_paquete) < 12 
+or NEW.nombre_paquete not regexp 'PQ+[0-9]+$' then
 	signal sqlstate '02000'
 	SET message_text = 'ID incorrecto';
     
@@ -66,15 +66,17 @@ BEGIN
 declare dnicartero varchar(9) default null;
 DECLARE done INT DEFAULT FALSE;
 DECLARE repartoID, pesoTotal INT;
+DECLARE cartero_DNI VARCHAR(20);
 DECLARE cur1 CURSOR FOR (
 		select Reparto.id_reparto, sum(peso) as pesoReparto
 		from Reparto join Paquete on Reparto.id_reparto = Paquete.id_reparto
 		group by Reparto.id_reparto
 );
-DECLARE cartero_DNI VARCHAR(20);
+
+
 DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-SET cartero_DNI = seleccionarCarteroDisponible();
 	OPEN cur1;
+    SET cartero_DNI=seleccionarCarteroDisponible();
     read_loop: LOOP
 		FETCH cur1 INTO repartoID, pesoTotal;
         IF pesoTotal>500 THEN
@@ -88,7 +90,7 @@ SET cartero_DNI = seleccionarCarteroDisponible();
     CLOSE cur1;
 END //
 DELIMITER ;
-
+DROP FUNCTION IF EXISTS seleccionarCarteroDisponible;
 DELIMITER &&
 CREATE FUNCTION seleccionarCarteroDisponible()
 RETURNS VARCHAR(20)
