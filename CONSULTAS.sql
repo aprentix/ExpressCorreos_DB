@@ -78,11 +78,7 @@ WHERE codigo_oficina IN(SELECT DISTINCT coche.codigo_oficina
 GROUP BY dni_cartero, coche.codigo_oficina
 ORDER BY dni_cartero,COUNT(*) DESC;
 
-/*Posible solución, la de arriba solo cuenta los pedidos, desconozco si la de abajo es 100% solución pero parece funcionar
-SELECT dni_cartero, count(*)
-FROM reparto
-group by dni_cartero
-order by count(*) DESC*/
+
 
 /*
 e. Obtener el peso total de los paquetes y el nivel mayor de urgencia de las cartas certificadas 
