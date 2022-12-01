@@ -95,9 +95,7 @@ INNER JOIN coche ON coche.matricula = reparto.matricula
 INNER JOIN oficina ON oficina.codigo = coche.codigo_oficina
 WHERE oficina.codigo = "3"
 AND fecha_creacion < CURDATE() AND fecha_creacion >= DATE_SUB(CURDATE(), INTERVAL 7 DAY);
-/*
-11.5
-*/
+
 /*
 Obtener el nivel mayor de urgencia de las cartas certificadas que ha llevado los coches de la oficina “OF-MAD-O1” 
 en los repartos que se les han asignado en los últimos 7 días.
