@@ -179,15 +179,15 @@ insert into Carta (id_carta, formato, id_UGenerico_envia, id_UGenerico_recibe, i
 
 /*PAQUETE*/
 insert into Paquete (dimension, peso, id_ug_envia, id_ug_recibe, dni_cartero, id_reparto) values 
-	(1.5, 0.5, 1, 2, '08628813H', 1), 
-    (1.5, 0.5, 1, 3, '08628813H', 1), 
-    (1.5, 0.5, 2, 4, '08628813H', 1), 
-    (1.5, 0.5, 1, 2, '08628813H', 1), 
+	(1.5, 0.5, 1, 2, '01154637Z', 1), 
+    (1.5, 0.5, 1, 3, '01154637Z', 1), 
+    (1.5, 0.5, 2, 4, '01154637Z', 1), 
+    (1.5, 0.5, 1, 2, '01154637Z', 1), 
     (3.5, 0.5, 2, 3, '08628813H', 2),
-    (2.5, 0.5, 3, 4, '08628813H', 6),
-    (4.5, 3.5, 5, 4, '08628813H', 7),
-    (6.5, 7.5, 5, 2, '08628813H', 8),
-    (8.5, 0.5, 3, 2, '08628813H', 9);
+    (2.5, 0.5, 3, 4, '29293473Y', 6),
+    (4.5, 3.5, 5, 4, '29293473Y', 7),
+    (6.5, 7.5, 5, 2, '57926582R', 8),
+    (8.5, 0.5, 3, 2, '66451628M', 9);
 
 /*CARTA CERTIFICADA*/
 insert into CartaCertificada (id_carta_certificada, nivel_urgencia, dni_ui_recibe, dni_ui_envia, id_reparto) values 
