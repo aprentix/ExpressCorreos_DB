@@ -50,7 +50,11 @@ end if;
 END$$
 
 DELIMITER ;
-
+/*
+La prueba del trigger de poner una dimension incorrecta funciona 
+insert into Paquete (dimension, peso, id_ug_envia, id_ug_recibe, dni_cartero, id_reparto, nombre_paquete) values 
+ ('0X0',0.5, 3, 2, '66451628M', 9, 'PQ123677');
+*/
 /*
 Define un trigger que compruebe que si se han incluido paquetes en un reparto con un peso mayor de 500Kg en total se le asigne un cartero. 
 Como el reparto al crearse tiene que tener asignado un coche, 
