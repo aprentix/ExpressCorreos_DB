@@ -15,22 +15,26 @@ public class CartaCertificada {
 
     @ManyToOne
     @JoinColumn(name = "UIrecibe")
-    private UsuarioIdentificado UIrecibe;
+    private UsuarioIdentificado UIRecibe;
 
     @ManyToOne
     @JoinColumn (name = "UIenvia")
-    private UsuarioIdentificado UIenvia;
+    private UsuarioIdentificado UIEnvia;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "Reparto")
     private Reparto reparto;
 
-    public CartaCertificada(int id, String nivelUrgencia, UsuarioIdentificado UIrecibe, UsuarioIdentificado UIenvia, Reparto reparto) {
+    public CartaCertificada(int id, String nivelUrgencia, UsuarioIdentificado UIRecibe, UsuarioIdentificado UIenvia, Reparto reparto) {
         this.id = id;
         this.nivelUrgencia = nivelUrgencia;
-        this.UIrecibe = UIrecibe;
-        this.UIenvia = UIenvia;
+        this.UIRecibe = UIRecibe;
+        this.UIEnvia = UIenvia;
         this.reparto = reparto;
+    }
+
+    public CartaCertificada() {
+
     }
 
     public int getId() {
@@ -41,12 +45,12 @@ public class CartaCertificada {
         return nivelUrgencia;
     }
 
-    public UsuarioIdentificado getUIrecibe() {
-        return UIrecibe;
+    public UsuarioIdentificado getUIRecibe() {
+        return UIRecibe;
     }
 
-    public UsuarioIdentificado getUIenvia() {
-        return UIenvia;
+    public UsuarioIdentificado getUIEnvia() {
+        return UIEnvia;
     }
 
     public Reparto getReparto() {
