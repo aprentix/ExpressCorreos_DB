@@ -24,7 +24,7 @@ public class CentroClasificacion {
     @JoinColumn(name = "Municipio")
     private Municipio municipio;
 
-    @OneToMany(mappedBy = "Municipio")
+    @OneToMany(mappedBy = "Centro de Clasificacion")
     private Set<Oficina> oficinas;
 
     public CentroClasificacion(int codigo, String nombre, int capacidadProcesamientoPaquetes, int capacidadProcesamientoCartas, Municipio municipio) {

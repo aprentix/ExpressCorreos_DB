@@ -1,9 +1,10 @@
 package ormExpressCorreos.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "Reparto")
+@Table(name = "Oficina")
 public class Oficina {
     @Id
     @GeneratedValue
@@ -17,6 +18,7 @@ public class Oficina {
     @ManyToOne
     @JoinColumn(name = "Municipio")
     private Municipio municipio;
+
 
     public Oficina(int codigo, CentroClasificacion centroClasificacion, Municipio municipio) {
         this.codigo = codigo;
