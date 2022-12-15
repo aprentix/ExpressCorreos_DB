@@ -8,7 +8,7 @@ import java.util.Set;
 public class Municipio {
     @Id
     @GeneratedValue
-    @Column(name = "Id", nullable = false)
+    @Column(name = "Id")
     private int id;
 
     @Column(name = "Nombre", nullable = false, unique = true)
