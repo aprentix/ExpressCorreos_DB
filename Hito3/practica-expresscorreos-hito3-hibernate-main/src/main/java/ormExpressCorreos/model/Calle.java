@@ -1,6 +1,7 @@
 package ormExpressCorreos.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Calle")
@@ -16,6 +17,9 @@ public class Calle {
     @ManyToOne
     @JoinColumn(name = "Municipio")
     private Municipio municipio;
+
+    @OneToMany(mappedBy = "Calle")
+    private Set<SegmentoCalle> segmentos;
 
     public Calle(int id, String nombre, Municipio municipio) {
         this.id = id;
