@@ -24,6 +24,9 @@ public class Municipio {
     @OneToMany(mappedBy = "Municipio")
     private Set<CentroClasificacion> centrosClasificacion;
 
+    @OneToMany(mappedBy = "Municipio")
+    private Set<Oficina> oficinas;
+
     public Municipio(int id, String nombre, Provincia provincia) {
         this.id = id;
         this.nombre = nombre;
