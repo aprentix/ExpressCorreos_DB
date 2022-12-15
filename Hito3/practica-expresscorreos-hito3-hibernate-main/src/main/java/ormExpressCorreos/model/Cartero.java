@@ -1,6 +1,7 @@
 package ormExpressCorreos.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Cartero")
@@ -15,6 +16,9 @@ public class Cartero {
 
     @Column(name = "Apellidos",  nullable = false)
     private String apellidos;
+
+    @OneToMany(mappedBy = "Cartero")
+    private Set<Recogida> recogidas;
 
     public Cartero(String DNI, String nombre, String apellidos) {
         this.DNI = DNI;
