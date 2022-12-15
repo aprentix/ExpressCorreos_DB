@@ -2,6 +2,7 @@ package ormExpressCorreos.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "Reparto")
@@ -25,6 +26,12 @@ public class Reparto {
     @ManyToOne
     @JoinColumn(name = "Ruta")
     private Ruta ruta;
+
+    @OneToMany(mappedBy = "Reparto")
+    private Set<Paquete> paquetes;
+
+    @OneToMany(mappedBy = "Reparto")
+    private Set<CartaCertificada> cartaCertificadas;
 
     public Reparto(int id, Date fechaCreacion, Cartero cartero, Coche coche, Ruta ruta) {
         Id = id;

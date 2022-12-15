@@ -20,6 +20,9 @@ public class Cartero {
     @OneToMany(mappedBy = "Cartero")
     private Set<Recogida> recogidas;
 
+    @OneToMany(mappedBy = "Cartero")
+    private Set<Paquete> paquetes;
+
     public Cartero(String DNI, String nombre, String apellidos) {
         this.DNI = DNI;
         this.nombre = nombre;
