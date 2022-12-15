@@ -21,6 +21,9 @@ public class Calle {
     @OneToMany(mappedBy = "Calle")
     private Set<SegmentoCalle> segmentos;
 
+    @OneToMany(mappedBy = "Calle")
+    private Set<Direccion> direcciones;
+
     public Calle(int id, String nombre, Municipio municipio) {
         this.id = id;
         this.nombre = nombre;
