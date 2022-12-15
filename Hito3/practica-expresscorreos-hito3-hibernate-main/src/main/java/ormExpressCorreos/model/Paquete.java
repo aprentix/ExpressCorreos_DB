@@ -17,11 +17,11 @@ public class Paquete {
     private double peso;
 
     @ManyToOne
-    @JoinColumn(name = "UGrecibe")
+    @JoinColumn(name = "UG recibe")
     private UsuarioGenerico UGRecibe;
 
     @ManyToOne
-    @JoinColumn (name = "UGenvia")
+    @JoinColumn (name = "UG envia")
     private UsuarioGenerico UGEnvia;
 
     @ManyToOne
