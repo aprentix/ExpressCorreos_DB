@@ -22,6 +22,12 @@ public class UsuarioGenerico {
     private Direccion direccion;
 
     @OneToMany(mappedBy = "UG envia")
+    private Set<Carta> enviaCartas;
+
+    @OneToMany(mappedBy = "UG recibe")
+    private Set<Carta> recibeCartas;
+
+    @OneToMany(mappedBy = "UG envia")
     private Set<Paquete> enviaPaquetes;
 
     @OneToMany(mappedBy = "UG recibe")

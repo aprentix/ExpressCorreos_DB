@@ -7,31 +7,38 @@ import javax.persistence.*;
 public class Carta {
     @Id
     @GeneratedValue
-    @Column(name = "Id", nullable = false)
+    @Column(name = "Id")
     private int id;
 
     @Column(name = "Formato", nullable = false)
     private String formato;
 
     @ManyToOne
-    @JoinColumn(name = "Id_UGenerico")
-    private UsuarioGenerico id_ugenerico;
+    @JoinColumn(name = "UG envia")
+    private UsuarioGenerico UGEnvia;
 
     @ManyToOne
-    @JoinColumn(name = "Id_Reparto")
-    private Reparto id_reparto;
+    @JoinColumn(name = "UG recibe")
+    private UsuarioGenerico UGRecibe;
 
-    public Carta() {
-        
-    }
+    @ManyToOne
+    @JoinColumn(name = "Reparto")
+    private Reparto reparto;
 
-    public Carta(int id, String formato, UsuarioGenerico id_ugenerico, Reparto id_reparto)
-    {
+    @ManyToOne
+    @JoinColumn(name = "Cartero")
+    private Cartero cartero;
 
+    public Carta(int id, String formato, UsuarioGenerico UGEnvia, UsuarioGenerico UGRecibe, Reparto reparto) {
         this.id = id;
         this.formato = formato;
-        this.id_ugenerico = id_ugenerico;
-        this.id_reparto = id_reparto;
+        this.UGEnvia = UGEnvia;
+        this.UGRecibe = UGRecibe;
+        this.reparto = reparto;
+    }
+
+    public Carta() {
+
     }
 
     public int getId() {
@@ -42,17 +49,16 @@ public class Carta {
         return formato;
     }
 
-    public void setFormato(String formato) {
-        this.formato = formato;
+    public UsuarioGenerico getUGEnvia() {
+        return UGEnvia;
     }
 
-    public UsuarioGenerico getId_ugenerico() {
-        return id_ugenerico;
-    }
-    
-    public Reparto getId_reparto() {
-        return id_reparto;
+    public UsuarioGenerico getUGRecibe() {
+        return UGRecibe;
     }
 
+    public Reparto getReparto() {
+        return reparto;
+    }
 }
 

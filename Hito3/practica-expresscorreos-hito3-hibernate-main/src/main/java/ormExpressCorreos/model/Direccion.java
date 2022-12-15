@@ -1,6 +1,6 @@
 package ormExpressCorreos.model;
 import javax.persistence.*;
-// @TODO completar las anotaciones de la clase
+
 @Entity
 @Table(name = "Direccion")
 public class Direccion {
@@ -39,6 +39,10 @@ public class Direccion {
         this.letra = letra1;
         this.portal = portal1;
         this.id_calle = id_calle1;
+    }
+
+    public Direccion() {
+
     }
 
     public Integer getNumero() {

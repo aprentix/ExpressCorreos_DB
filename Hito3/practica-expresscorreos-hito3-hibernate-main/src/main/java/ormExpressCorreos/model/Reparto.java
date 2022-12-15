@@ -28,6 +28,9 @@ public class Reparto {
     private Ruta ruta;
 
     @OneToMany(mappedBy = "Reparto")
+    private Set<Carta> cartas;
+
+    @OneToMany(mappedBy = "Reparto")
     private Set<Paquete> paquetes;
 
     @OneToMany(mappedBy = "Reparto")
