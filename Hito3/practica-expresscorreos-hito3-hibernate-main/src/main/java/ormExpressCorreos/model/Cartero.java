@@ -21,6 +21,9 @@ public class Cartero {
     private Set<Recogida> recogidas;
 
     @OneToMany(mappedBy = "Cartero")
+    private Set<Reparto> repartos;
+
+    @OneToMany(mappedBy = "Cartero")
     private Set<Paquete> paquetes;
 
     public Cartero(String DNI, String nombre, String apellidos) {

@@ -1,6 +1,7 @@
 package ormExpressCorreos.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Oficina")
@@ -17,6 +18,12 @@ public class Oficina {
     @ManyToOne
     @JoinColumn(name = "Municipio")
     private Municipio municipio;
+
+    @OneToMany(mappedBy = "Oficina")
+    private Set<AreaEnvio> areaEnvios;
+
+    @OneToMany(mappedBy = "Oficina")
+    private Set<Coche> coches;
 
 
     public Oficina(int codigo, CentroClasificacion centroClasificacion, Municipio municipio) {
