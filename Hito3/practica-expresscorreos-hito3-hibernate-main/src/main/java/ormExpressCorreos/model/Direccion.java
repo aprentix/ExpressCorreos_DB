@@ -1,5 +1,6 @@
 package ormExpressCorreos.model;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Direccion")
@@ -24,4 +25,47 @@ public class Direccion {
     @ManyToOne
     @JoinColumn(name="Calle")
     private Calle calle;
+
+    @OneToMany(mappedBy = "Direccion")
+    private Set<UsuarioGenerico> usuarioGenericos;
+
+    @OneToMany(mappedBy = "Direccion")
+    private Set<Recogida> recogidas;
+
+    public Direccion(int id, int numero, String piso, char letra, int portal, Calle calle) {
+        this.id = id;
+        this.numero = numero;
+        this.piso = piso;
+        this.letra = letra;
+        this.portal = portal;
+        this.calle = calle;
+    }
+
+    public Direccion() {
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public String getPiso() {
+        return piso;
+    }
+
+    public char getLetra() {
+        return letra;
+    }
+
+    public int getPortal() {
+        return portal;
+    }
+
+    public Calle getCalle() {
+        return calle;
+    }
 }
