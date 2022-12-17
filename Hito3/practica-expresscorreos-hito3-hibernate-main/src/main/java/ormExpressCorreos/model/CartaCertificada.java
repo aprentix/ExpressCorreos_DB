@@ -13,12 +13,12 @@ public class CartaCertificada {
     @Column(name = "Nivel de Urgencia", nullable = false)
     private String nivelUrgencia;
 
-    @ManyToOne
-    @JoinColumn(name = "UI recibe")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "UIRecibe")
     private UsuarioIdentificado UIRecibe;
 
     @ManyToOne
-    @JoinColumn (name = "UI envia")
+    @JoinColumn (name = "UIEnvia")
     private UsuarioIdentificado UIEnvia;
 
     @ManyToOne

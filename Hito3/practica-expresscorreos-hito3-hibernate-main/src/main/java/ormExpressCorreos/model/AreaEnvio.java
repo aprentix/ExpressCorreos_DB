@@ -1,10 +1,11 @@
 package ormExpressCorreos.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Area de Envio")
+@Table(name = "AreaDeEnvio")
 public class AreaEnvio {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -14,23 +15,23 @@ public class AreaEnvio {
     @Column(name = "Nombre")
     private String nombre;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "Oficina")
     private Oficina oficina;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "Segmentos de Area")
     private Set<SegmentoCalle> segmentosCalles;
 
-    @ManyToMany
-    @JoinTable(name = "Area incluye area")
-    private Set<AreaEnvio> areaIncluida;
-
     @ManyToMany(mappedBy = "areaIncluida")
-    private Set<AreaEnvio> areaIncluye;
+    private Set<AreaEnvio> areaIncluye = new HashSet<AreaEnvio>();
+
+    @ManyToMany()
+    @JoinTable(name = "Area incluye area")
+    private Set<AreaEnvio> areaIncluida = new HashSet<AreaEnvio>();
 
     @ManyToMany(mappedBy = "areasEnvios")
-    private Set<Cartero> carteros;
+    private Set<Cartero> carteros = new HashSet<Cartero>();
 
     public AreaEnvio(int id, String nombre, Oficina oficina) {
         this.id = id;
