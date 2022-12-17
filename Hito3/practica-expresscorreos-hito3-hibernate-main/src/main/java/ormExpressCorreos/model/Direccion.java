@@ -26,10 +26,10 @@ public class Direccion {
     @JoinColumn(name="Calle")
     private Calle calle;
 
-    @OneToMany(mappedBy = "Direccion")
+    @OneToMany(mappedBy = "direccion")
     private Set<UsuarioGenerico> usuarioGenericos;
 
-    @OneToMany(mappedBy = "Direccion")
+    @OneToMany(mappedBy = "direccion")
     private Set<Recogida> recogidas;
 
     @ManyToMany(mappedBy = "direcciones")

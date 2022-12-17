@@ -27,13 +27,13 @@ public class Reparto {
     @JoinColumn(name = "Ruta")
     private Ruta ruta;
 
-    @OneToMany(mappedBy = "Reparto")
+    @OneToMany(mappedBy = "reparto")
     private Set<Carta> cartas;
 
-    @OneToMany(mappedBy = "Reparto")
+    @OneToMany(mappedBy = "reparto")
     private Set<Paquete> paquetes;
 
-    @OneToMany(mappedBy = "Reparto")
+    @OneToMany(mappedBy = "reparto")
     private Set<CartaCertificada> cartaCertificadas;
 
     public Reparto(int id, Date fechaCreacion, Cartero cartero, Coche coche, Ruta ruta) {

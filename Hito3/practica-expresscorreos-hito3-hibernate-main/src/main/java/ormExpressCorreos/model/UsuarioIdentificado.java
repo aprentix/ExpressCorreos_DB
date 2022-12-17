@@ -24,16 +24,16 @@ public class UsuarioIdentificado {
     @JoinColumn(name = "Usuario Autorizado")
     private UsuarioIdentificado usuarioAutorizado;
 
-    @OneToMany(mappedBy = "Usuario Autorizado")
+    @OneToMany(mappedBy = "usuarioAutorizado")
     private Set<UsuarioIdentificado> usuariosAutorizados;
 
-    @OneToMany(mappedBy = "UG envia")
+    @OneToMany(mappedBy = "UIEnvia")
     private Set<CartaCertificada> enviaCartaCertificadas;
 
-    @OneToMany(mappedBy = "UI envia")
+    @OneToMany(mappedBy = "UIRecibe")
     private Set<Paquete> recibeCartaCertificadas;
 
-    @OneToMany(mappedBy = "Usuario Identificado")
+    @OneToMany(mappedBy = "usuarioIdentificado")
     private Set<Recogida> recogidas;
 
     @ManyToMany

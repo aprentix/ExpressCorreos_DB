@@ -19,10 +19,10 @@ public class Oficina {
     @JoinColumn(name = "Municipio")
     private Municipio municipio;
 
-    @OneToMany(mappedBy = "Oficina")
+    @OneToMany(mappedBy = "oficina")
     private Set<AreaEnvio> areaEnvios;
 
-    @OneToMany(mappedBy = "Oficina")
+    @OneToMany(mappedBy = "oficina")
     private Set<Coche> coches;
 
 

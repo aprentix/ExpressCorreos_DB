@@ -11,7 +11,7 @@ public class Ruta {
     @Column(name = "Id")
     private int matricula;
 
-    @OneToMany(mappedBy = "Ruta")
+    @OneToMany(mappedBy = "ruta")
     private Set<Reparto> repartos;
 
     @ManyToMany

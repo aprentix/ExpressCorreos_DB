@@ -27,7 +27,7 @@ public class Recogida {
     @JoinColumn(name = "Cartero")
     private Cartero cartero;
 
-    @OneToMany(mappedBy = "Recogida")
+    @OneToMany(mappedBy = "recogida")
     private Set<Paquete> paquetes;
 
     public Recogida(int id, Date fechaRecogida, Direccion direccion, UsuarioIdentificado usuarioIdentificado, Cartero cartero) {

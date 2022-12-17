@@ -21,16 +21,16 @@ public class UsuarioGenerico {
     @JoinColumn(name = "Direccion")
     private Direccion direccion;
 
-    @OneToMany(mappedBy = "UG envia")
+    @OneToMany(mappedBy = "UGEnvia")
     private Set<Carta> enviaCartas;
 
-    @OneToMany(mappedBy = "UG recibe")
+    @OneToMany(mappedBy = "UGRecibe")
     private Set<Carta> recibeCartas;
 
-    @OneToMany(mappedBy = "UG envia")
+    @OneToMany(mappedBy = "UGEnvia")
     private Set<Paquete> enviaPaquetes;
 
-    @OneToMany(mappedBy = "UG recibe")
+    @OneToMany(mappedBy = "UGRecibe")
     private Set<Paquete> recibePaquetes;
 
 

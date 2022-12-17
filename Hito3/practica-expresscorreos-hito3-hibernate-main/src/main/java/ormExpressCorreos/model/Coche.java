@@ -18,7 +18,7 @@ public class Coche {
     @JoinColumn(name = "Oficina")
     private Oficina oficina;
 
-    @OneToMany(mappedBy = "Coche")
+    @OneToMany(mappedBy = "coche")
     private Set<Reparto> repartos;
 
     public Coche(int matricula, double capacidad, Oficina oficina) {

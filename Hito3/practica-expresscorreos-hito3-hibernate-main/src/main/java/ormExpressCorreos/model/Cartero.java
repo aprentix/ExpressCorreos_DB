@@ -17,16 +17,16 @@ public class Cartero {
     @Column(name = "Apellidos",  nullable = false)
     private String apellidos;
 
-    @OneToMany(mappedBy = "Cartero")
+    @OneToMany(mappedBy = "cartero")
     private Set<Recogida> recogidas;
 
-    @OneToMany(mappedBy = "Cartero")
+    @OneToMany(mappedBy = "cartero")
     private Set<Reparto> repartos;
 
-    @OneToMany(mappedBy = "Cartero")
+    @OneToMany(mappedBy = "cartero")
     private Set<Paquete> paquetes;
 
-    @OneToMany(mappedBy = "Cartero")
+    @OneToMany(mappedBy = "cartero")
     private Set<Carta> cartas;
 
     @ManyToMany

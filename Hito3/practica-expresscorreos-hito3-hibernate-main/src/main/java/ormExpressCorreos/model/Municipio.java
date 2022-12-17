@@ -18,13 +18,13 @@ public class Municipio {
     @JoinColumn(name = "Provincia")
     private Provincia provincia;
 
-    @OneToMany(mappedBy = "Municipio")
+    @OneToMany(mappedBy = "municipio")
     private Set<Calle> calles;
 
-    @OneToMany(mappedBy = "Municipio")
+    @OneToMany(mappedBy = "municipio")
     private Set<CentroClasificacion> centrosClasificacion;
 
-    @OneToMany(mappedBy = "Municipio")
+    @OneToMany(mappedBy = "municipio")
     private Set<Oficina> oficinas;
 
     public Municipio(int id, String nombre, Provincia provincia) {

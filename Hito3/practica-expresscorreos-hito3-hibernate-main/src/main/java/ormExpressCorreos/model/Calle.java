@@ -18,10 +18,10 @@ public class Calle {
     @JoinColumn(name = "Municipio")
     private Municipio municipio;
 
-    @OneToMany(mappedBy = "Calle")
+    @OneToMany(mappedBy = "calle")
     private Set<SegmentoCalle> segmentos;
 
-    @OneToMany(mappedBy = "Calle")
+    @OneToMany(mappedBy = "calle")
     private Set<Direccion> direcciones;
 
     public Calle(int id, String nombre, Municipio municipio) {

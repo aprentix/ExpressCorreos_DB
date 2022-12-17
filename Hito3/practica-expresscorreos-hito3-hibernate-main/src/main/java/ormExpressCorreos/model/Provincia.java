@@ -10,7 +10,7 @@ public class Provincia {
     @Column(name = "Nombre")
     private String nombre;
 
-    @OneToMany(mappedBy = "Provincia")
+    @OneToMany(mappedBy = "provincia")
     private Set<Municipio> municipios;
 
     public Provincia(String nombre) {
