@@ -32,6 +32,9 @@ public class Direccion {
     @OneToMany(mappedBy = "Direccion")
     private Set<Recogida> recogidas;
 
+    @ManyToMany(mappedBy = "direcciones")
+    private Set<UsuarioIdentificado> usuariosIdentificados;
+
     public Direccion(int id, int numero, String piso, char letra, int portal, Calle calle) {
         this.id = id;
         this.numero = numero;

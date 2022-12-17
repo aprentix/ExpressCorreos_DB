@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Usuario Generico")
+@Table(name = "Usuario Identificado")
 public class UsuarioIdentificado {
     @Id
     @GeneratedValue
@@ -35,6 +35,10 @@ public class UsuarioIdentificado {
 
     @OneToMany(mappedBy = "Usuario Identificado")
     private Set<Recogida> recogidas;
+
+    @ManyToMany
+    @JoinTable(name = "Usuarios Identificados")
+    private Set<Direccion> direcciones;
 
     public UsuarioIdentificado(int dni, String nombre, String apellidos, String correoElectronico, UsuarioIdentificado usuarioAutorizado) {
         this.dni = dni;
