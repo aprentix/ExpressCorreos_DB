@@ -22,6 +22,16 @@ public class AreaEnvio {
     @JoinTable(name = "Segmentos de Area")
     private Set<SegmentoCalle> segmentosCalles;
 
+    @ManyToMany
+    @JoinTable(name = "Area incluye area")
+    private Set<AreaEnvio> areaIncluida;
+
+    @ManyToMany(mappedBy = "areaIncluida")
+    private Set<AreaEnvio> areaIncluye;
+
+    @ManyToMany(mappedBy = "areasEnvios")
+    private Set<Cartero> carteros;
+
     public AreaEnvio(int id, String nombre, Oficina oficina) {
         this.id = id;
         this.nombre = nombre;
