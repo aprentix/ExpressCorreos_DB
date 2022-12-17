@@ -24,6 +24,9 @@ public class SegmentoCalle {
     @ManyToMany(mappedBy = "segmentosCalles")
     private Set<AreaEnvio> areasEnvios;
 
+    @ManyToMany(mappedBy = "segmentosCalles")
+    private Set<Ruta> rutas;
+
     public SegmentoCalle(int id, int nInicio, int nFinal, Calle calle) {
         this.id = id;
         this.nInicio = nInicio;

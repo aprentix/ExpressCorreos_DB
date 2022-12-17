@@ -14,6 +14,11 @@ public class Ruta {
     @OneToMany(mappedBy = "Ruta")
     private Set<Reparto> repartos;
 
+    @ManyToMany
+    @JoinTable(name = "Segmentos de Rutas")
+    private Set<SegmentoCalle> segmentosCalles;
+
+
     public Ruta(int matricula) {
         this.matricula = matricula;
     }

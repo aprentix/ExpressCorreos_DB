@@ -37,7 +37,7 @@ public class UsuarioIdentificado {
     private Set<Recogida> recogidas;
 
     @ManyToMany
-    @JoinTable(name = "Usuarios Identificados")
+    @JoinTable(name = "Direcciones de Usuarios Identificados")
     private Set<Direccion> direcciones;
 
     public UsuarioIdentificado(int dni, String nombre, String apellidos, String correoElectronico, UsuarioIdentificado usuarioAutorizado) {
