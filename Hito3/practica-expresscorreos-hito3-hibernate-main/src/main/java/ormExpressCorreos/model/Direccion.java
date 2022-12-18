@@ -41,7 +41,7 @@ public class Direccion {
         this.piso = piso;
         this.letra = letra;
         this.portal = portal;
-        this.calle = calle;
+        this.calle=calle;
     }
 
     public Direccion() {
@@ -49,9 +49,8 @@ public class Direccion {
     }
 
     public String getDireccionCompleta(){
-        return this.calle+", "+this.numero+", "+
+        return this.calle.getNombre()+", "+this.numero+", "+
                 this.portal+ ", "+ this.letra+ ", "+
-                this.calle.getNombre() + ", "+
                 this.calle.getMunicipio().getNombre();
     }
     public int getId() {

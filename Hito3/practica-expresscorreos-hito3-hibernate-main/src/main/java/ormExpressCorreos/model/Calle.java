@@ -44,4 +44,12 @@ public class Calle {
     public Municipio getMunicipio() {
         return municipio;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
 }

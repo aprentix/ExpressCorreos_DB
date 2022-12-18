@@ -42,26 +42,37 @@ public class Controller {
      * @return el nuevo usuario creado
      * @throws SQLException
      */
-    public UsuarioGenerico createUsuarioGenerico(String nombre, String apellidos) throws SQLException{
+    public UsuarioGenerico createUsuarioGenerico(String nombre, String apellidos, Direccion direccion) throws SQLException{
         // @TODO completa este metodo para crear de forma presistente un usuario genérico
-        Direccion direccion = new Direccion();
+        session.beginTransaction();
         UsuarioGenerico usuarioGenerico = new UsuarioGenerico(nombre, apellidos, direccion);
+        session.save(usuarioGenerico);
+        session.getTransaction().commit();
         return usuarioGenerico;
     }
 
     public UsuarioIdentificado createUsuarioIdentificado(String DNI, String nombre, String apellidos, String email) throws SQLException {
         // @TODO completa este metodo para crear de forma presistente un usuario identificado
-        UsuarioIdentificado usuarioIdentificado = new UsuarioIdentificado("X6327497J", "Rosa", "Ramirez", "rosram@gmail.com");
+        session.beginTransaction();
+        UsuarioIdentificado usuarioIdentificado = new UsuarioIdentificado(DNI, nombre, apellidos, email);
+        session.save(usuarioIdentificado);
+        session.getTransaction().commit();
         return usuarioIdentificado;
     }
 
-    public Direccion createDireccion(int numero, String piso, char letra, int portal, Calle calle) throws SQLException {
+    public Direccion createDireccion(int numero, String piso, char letra, int portal, String _provincia, String _municipio, String _calle) throws SQLException {
         // @TODO completa este metodo para crear de forma presistente una direccion
+        session.beginTransaction();
+        Provincia provincia = new Provincia(_provincia);
+        Municipio municipio = new Municipio(_municipio, provincia); // String nombre, Provincia provincia
+        Calle calle = new Calle(_calle, municipio); // String nombre, Municipio municipio
         Direccion direccion = new Direccion(numero, piso, letra, portal, calle);
+        session.save(provincia);
+        session.save(municipio);
+        session.save(calle);
+        session.save(direccion);
+        session.getTransaction().commit();
         return direccion;
     }
 
-    public Session getSession() {
-        return session;
-    }
 }

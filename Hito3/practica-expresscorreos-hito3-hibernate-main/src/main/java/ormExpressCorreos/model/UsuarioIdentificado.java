@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Usuario Identificado")
+@Table(name = "UsuarioIdentificado")
 public class UsuarioIdentificado {
     @Id
     @Column(name = "DNI")
@@ -17,28 +17,28 @@ public class UsuarioIdentificado {
     @Column(name = "Apellidos", nullable = false)
     private String apellidos;
 
-    @Column(name = "Correo Electronico", nullable = false)
+    @Column(name = "CorreoElectronico", nullable = false)
     private String correoElectronico;
 
     @ManyToOne
-    @JoinColumn(name = "Usuario Autorizado")
+    @JoinColumn(name = "UsuarioAutorizado")
     private UsuarioIdentificado usuarioAutorizado;
 
     @OneToMany(mappedBy = "usuarioAutorizado")
-    private Set<UsuarioIdentificado> usuariosAutorizados = new HashSet<UsuarioIdentificado>();
+    private Set<UsuarioIdentificado> usuariosAutorizados;
 
     @OneToMany(mappedBy = "UIEnvia")
-    private Set<CartaCertificada> enviaCartaCertificadas = new HashSet<CartaCertificada>();
+    private Set<CartaCertificada> enviaCartaCertificadas;
 
     @OneToMany(mappedBy = "UIRecibe")
-    private Set<CartaCertificada> recibeCartaCertificadas = new HashSet<CartaCertificada>();
+    private Set<CartaCertificada> recibeCartaCertificadas;
 
     @OneToMany(mappedBy = "usuarioIdentificado")
-    private Set<Recogida> recogidas = new HashSet<Recogida>();
+    private Set<Recogida> recogidas;
 
     @ManyToMany
     @JoinTable(name = "Direcciones de Usuarios Identificados")
-    private Set<Direccion> direcciones = new HashSet<Direccion>();
+    private Set<Direccion> direcciones;
 
     public UsuarioIdentificado(String dni, String nombre, String apellidos, String correoElectronico) {
         this.dni = dni;

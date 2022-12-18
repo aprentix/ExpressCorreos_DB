@@ -11,23 +11,16 @@ public class Main {
 
     public static void main (String [] args) {
         try {
+            System.out.println("//////////////");
             Controller controlador= new Controller();
+            System.out.println("//////////////");
+
             // @TODO añada las llamadas a las funciones de la clase Controller.java necesarias
             UsuarioIdentificado usuarioIdentificado = controlador.createUsuarioIdentificado("X6327497J", "Rosa", "Ramirez", "rosram@gmail.com");
-            Provincia provincia = new Provincia("Madrid");
-            Municipio municipio = new Municipio("Madrid", provincia); // String nombre, Provincia provincia
-            Calle calle = new Calle("Guzmán el Bueno", municipio); // String nombre, Municipio municipio
-            Direccion direccion = controlador.createDireccion(21, "BJ", 'A', 4, calle);
+            Direccion direccion = controlador.createDireccion(21, "BJ", 'A', 4, "Madrid", "Madrid", "Guzmán el Bueno");
             if(usuarioIdentificado != null && direccion != null) {
-                usuarioIdentificado.getDirecciones().add(direccion);
-                direccion.getUsuariosIdentificados().add(usuarioIdentificado);
-                controlador.getSession().beginTransaction();
-                controlador.getSession().save(usuarioIdentificado);
-                controlador.getSession().save(provincia);
-                controlador.getSession().save(municipio);
-                controlador.getSession().save(calle);
-                controlador.getSession().save(direccion);
-                controlador.getSession().getTransaction().commit();
+                System.out.println("//////////////");
+
                 System.out.println("Se ha creado el usuario identificado " + usuarioIdentificado.getNombre() + " con DNI "
                         + usuarioIdentificado.getDni() + " que vive en " + direccion.getDireccionCompleta());
             }

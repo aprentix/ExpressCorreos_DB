@@ -24,14 +24,14 @@ public class AreaEnvio {
     private Set<SegmentoCalle> segmentosCalles;
 
     @ManyToMany(mappedBy = "areaIncluida")
-    private Set<AreaEnvio> areaIncluye = new HashSet<AreaEnvio>();
+    private Set<AreaEnvio> areaIncluye;
 
     @ManyToMany()
     @JoinTable(name = "Area incluye area")
-    private Set<AreaEnvio> areaIncluida = new HashSet<AreaEnvio>();
+    private Set<AreaEnvio> areaIncluida;
 
     @ManyToMany(mappedBy = "areasEnvios")
-    private Set<Cartero> carteros = new HashSet<Cartero>();
+    private Set<Cartero> carteros;
 
     public AreaEnvio(int id, String nombre, Oficina oficina) {
         this.id = id;
